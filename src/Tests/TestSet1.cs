@@ -87,5 +87,35 @@ namespace Tests
             Assert.True(dict.TryGet(list1, out a));
             Assert.Equal(5, a);
         }
+
+        [Fact]
+        public void Test004()
+        {
+            var dict = new DictionaryList<int, int>();
+
+            var list1 = new List<int> { 1, 2, 10 };
+            var list2 = new List<int> { 1, 2, 3 };
+            var list3 = new List<int> { 1, 2, 3, 3 };
+            var list4 = new List<int> { 1, 2, 3, 3, 5 };
+            var list5 = new List<int> { 1, 2, 3, 1 };
+
+            dict.Add(list1, 30);
+            dict.Add(list2, 50);
+            dict.Add(list3, 70);
+            dict.Add(list4, 80);
+            dict.Add(list5, 100);
+
+            Assert.True(dict.TryGet(list1, out var a));
+            Assert.True(dict.TryGet(list2, out var b));
+            Assert.True(dict.TryGet(list3, out var c));
+            Assert.True(dict.TryGet(list4, out var d));
+            Assert.True(dict.TryGet(list5, out var e));
+
+            Assert.Equal(30, a);
+            Assert.Equal(50, b);
+            Assert.Equal(70, c);
+            Assert.Equal(80, d);
+            Assert.Equal(100, e);
+        }
     }
 }

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DictionaryList", "src\DictionaryList\DictionaryList.csproj", "{7D9BA2C8-C770-4EB5-AAA8-956883F0D277}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DictionaryList", "DictionaryList\DictionaryList.csproj", "{7D9BA2C8-C770-4EB5-AAA8-956883F0D277}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "src\Tests\Tests.csproj", "{BDCCC212-3073-4CD9-A8C0-1D14597FF4D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{BDCCC212-3073-4CD9-A8C0-1D14597FF4D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runner", "Runner\Runner.csproj", "{88547E4E-0E13-4B9E-B3EB-3AC919283C35}"
 EndProject
