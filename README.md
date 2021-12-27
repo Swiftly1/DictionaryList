@@ -35,7 +35,7 @@ and I decided to use tree-based approach, which's explained below.
 
 # How does it work?
 
-Basically it represents all those lists as a tree and stores pair of list (element and optional value)
+Basically it represents all those lists as a tree and stores pairs of list's elements and **NULL or if that was the last element, then the value** 
 
 For example, for those lists, the tree will look like:
 
