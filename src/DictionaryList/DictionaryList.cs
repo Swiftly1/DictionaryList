@@ -15,6 +15,10 @@ namespace DictionaryList
             for (int i = 0; i < data.Count; i++)
             {
                 T item = data[i];
+
+                if (item == null)
+                    throw new ArgumentException($"Element at index '{i}' is null. It cannot be used as a Key's element");
+
                 var found = current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
                 var isLast = i == data.Count - 1;
 
