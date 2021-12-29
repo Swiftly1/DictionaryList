@@ -117,5 +117,77 @@ namespace Tests
             Assert.Equal(80, d);
             Assert.Equal(100, e);
         }
+
+        [Fact]
+        public void Test005()
+        {
+            var dict = new DictionaryList<int, int>();
+
+            var list1 = new List<int> { 0, 0, 0 };
+            var list2 = new List<int> { 0, 0 };
+
+            dict.Add(list1, 15);
+            dict.Add(list2, 16);
+
+            Assert.True(dict.TryGet(list1, out var a));
+            Assert.Equal(15, a);
+
+            Assert.True(dict.TryGet(list2, out var b));
+            Assert.Equal(16, b);
+        }
+
+        [Fact]
+        public void Test006()
+        {
+            var dict = new DictionaryList<int, int>();
+
+            var list1 = new List<int> { 0, 0, };
+            var list2 = new List<int> { 0, 0, 0 };
+
+            dict.Add(list1, 15);
+            dict.Add(list2, 16);
+
+            Assert.True(dict.TryGet(list1, out var a));
+            Assert.Equal(15, a);
+
+            Assert.True(dict.TryGet(list2, out var b));
+            Assert.Equal(16, b);
+        }
+
+        [Fact]
+        public void Test007()
+        {
+            var dict = new DictionaryList<int, int>();
+
+            var list1 = new List<int> { 0 };
+            var list2 = new List<int> { 0, 0 };
+
+            dict.Add(list1, 15);
+            dict.Add(list2, 16);
+
+            Assert.True(dict.TryGet(list1, out var a));
+            Assert.Equal(15, a);
+
+            Assert.True(dict.TryGet(list2, out var b));
+            Assert.Equal(16, b);
+        }
+
+        [Fact]
+        public void Test008()
+        {
+            var dict = new DictionaryList<int, int>();
+
+            var list1 = new List<int> { 0, 0 };
+            var list2 = new List<int> { 0 };
+
+            dict.Add(list1, 15);
+            dict.Add(list2, 16);
+
+            Assert.True(dict.TryGet(list1, out var a));
+            Assert.Equal(15, a);
+
+            Assert.True(dict.TryGet(list2, out var b));
+            Assert.Equal(16, b);
+        }
     }
 }

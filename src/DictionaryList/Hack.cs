@@ -14,7 +14,7 @@
 
         public override string ToString()
         {
-            return $"{(HasValue ? Value : "NULL")}";
+            return $"{(HasValue ? Value!.ToString() : "NULL")}";
         }
     }
 }
