@@ -189,5 +189,69 @@ namespace Tests
             Assert.True(dict.TryGet(list2, out var b));
             Assert.Equal(16, b);
         }
+
+        [Fact]
+        public void Test009()
+        {
+            var dict = new DictionaryList<TestObject, int>();
+
+            var list1 = new List<TestObject> { new TestObject(), new TestObject() };
+            var list2 = new List<TestObject> { new TestObject() };
+
+            dict.Add(list1, 15);
+            dict.Add(list2, 16);
+
+            Assert.True(dict.TryGet(list1, out var a));
+            Assert.Equal(15, a);
+
+            Assert.True(dict.TryGet(list2, out var b));
+            Assert.Equal(16, b);
+        }
+
+        [Fact]
+        public void Test010()
+        {
+            var dict = new DictionaryList<TestObject, int>();
+
+            var list1 = new List<TestObject> { null, new TestObject() };
+            var list2 = new List<TestObject> { new TestObject() };
+
+            dict.Add(list1, 15);
+            dict.Add(list2, 16);
+
+            Assert.True(dict.TryGet(list1, out var a));
+            Assert.Equal(15, a);
+
+            Assert.True(dict.TryGet(list2, out var b));
+            Assert.Equal(16, b);
+        }
+
+        [Fact]
+        public void Test011()
+        {
+            var dict = new DictionaryList<TestObject, int>();
+
+            var list1 = new List<TestObject> { null, null };
+            var list2 = new List<TestObject> { null };
+
+            dict.Add(list1, 15);
+            dict.Add(list2, 16);
+
+            Assert.True(dict.TryGet(list1, out var a));
+            Assert.Equal(15, a);
+
+            Assert.True(dict.TryGet(list2, out var b));
+            Assert.Equal(16, b);
+        }
+
+        public class TestObject
+        {
+            public Guid Id { get; set; } = new Guid();
+
+            public override string ToString()
+            {
+                return Id.ToString();
+            }
+        }
     }
 }

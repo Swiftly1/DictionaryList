@@ -6,7 +6,7 @@ namespace DictionaryList
 {
     public class DictionaryList<T, U>
     {
-        private Node<T, U> Root = new Node<T, U>() { IsRoot = true };
+        private readonly Node<T, U> Root = new Node<T, U>(default!, null) { IsRoot = true };
 
         public void Add(List<T> data, U value)
         {
@@ -15,7 +15,7 @@ namespace DictionaryList
             for (int i = 0; i < data.Count; i++)
             {
                 T item = data[i];
-                var found = current.Children.FirstOrDefault(x => x.ArrayValue.HasValue && x.ArrayValue.Value.Equals(item));
+                var found = current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
                 var isLast = i == data.Count - 1;
 
                 if (found != null)
@@ -28,7 +28,7 @@ namespace DictionaryList
                         }
                         else
                         {
-                            if (found.StoredValue.HasValue && !found.StoredValue.Value.Equals(value))
+                            if (found.StoredValue.HasValue && !found.StoredValue.Value!.Equals(value))
                             {
                                 throw new ArgumentException($"Value: '{value}' cannot be saved because there's already value:" +
                                     $" {found.StoredValue.Value}. Key: {string.Join(",", data)}");
@@ -40,9 +40,8 @@ namespace DictionaryList
                 }
                 else
                 {
-                    var wrapper1 = new ValueWrapper<T>(true, item);
                     var wrapper2 = new ValueWrapper<U>(isLast, value);
-                    current = current.Add(wrapper1, wrapper2);
+                    current = current.Add(item, wrapper2);
                 }
             }
         }
@@ -54,7 +53,7 @@ namespace DictionaryList
             for (int i = 0; i < data.Count; i++)
             {
                 T item = data[i];
-                var found = current.Children.FirstOrDefault(x => x.ArrayValue.HasValue && x.ArrayValue.Value.Equals(item));
+                var found = current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
                 var isLast = i == data.Count - 1;
 
                 if (found != null)
