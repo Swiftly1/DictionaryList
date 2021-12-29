@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
@@ -72,9 +71,24 @@ namespace DictionaryList
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Node<T, U> FindNode(Node<T, U> current, T item)
         {
-            return AllowNULLsInKeys ?
-                current.Children.FirstOrDefault(x => Equals(x.ArrayValue, item)) :
-                current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
+            if (AllowNULLsInKeys)
+            {
+                for (int i = 0; i < current.Children.Count; i++)
+                {
+                    if (Equals(current.Children[i].ArrayValue, item))
+                        return current.Children[i];
+                }
+            }
+            else
+            {
+                for (int i = 0; i < current.Children.Count; i++)
+                {
+                    if (current.Children[i].ArrayValue!.Equals(item))
+                        return current.Children[i];
+                }
+            }
+
+            return null;
         }
 
         public bool TryGet(List<T> data, out U? value)
