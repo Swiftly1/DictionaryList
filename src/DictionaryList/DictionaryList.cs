@@ -8,6 +8,8 @@ namespace DictionaryList
     {
         private readonly Node<T, U> Root = new Node<T, U>(default!, null) { IsRoot = true };
 
+        public bool AllowNULLsInKeys { get; set; }
+
         public void Add(List<T> data, U value)
         {
             var current = Root;
@@ -16,10 +18,13 @@ namespace DictionaryList
             {
                 T item = data[i];
 
-                if (item == null)
+                if (!AllowNULLsInKeys && item == null)
                     throw new ArgumentException($"Element at index '{i}' is null. It cannot be used as a Key's element");
 
-                var found = current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
+                var found = AllowNULLsInKeys ?
+                    current.Children.FirstOrDefault(x => Equals(x.ArrayValue, item)) :
+                    current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
+
                 var isLast = i == data.Count - 1;
 
                 if (found != null)
@@ -57,7 +62,11 @@ namespace DictionaryList
             for (int i = 0; i < data.Count; i++)
             {
                 T item = data[i];
-                var found = current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
+
+                var found = AllowNULLsInKeys ?
+                    current.Children.FirstOrDefault(x => Equals(x.ArrayValue, item)) :
+                    current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
+
                 var isLast = i == data.Count - 1;
 
                 if (found != null)
