@@ -9,11 +9,20 @@ namespace DictionaryList
     {
         private readonly Node<T, U> Root = new Node<T, U>(default!, null) { IsRoot = true };
 
+        /// <summary>
+        /// This parameter indicates whether key contains NULLs e.g [UserA, null, new User()].
+        /// Allowing NULLs within keys has some performance - speed and memory penalty, that's why it is disabled by default.
+        /// </summary>
         public bool AllowNULLsInKeys { get; set; }
 
-        public DictionaryList(bool allow_nulls = false)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="allow_nulls">This parameter indicates whether key contains NULLs e.g [UserA, null, new User()].
+        /// Allowing NULLs within keys has some performance - speed and memory penalty, that's why it is disabled by default.</param>
+        public DictionaryList(bool allow_keys_with_nulls = false)
         {
-            AllowNULLsInKeys = allow_nulls;
+            AllowNULLsInKeys = allow_keys_with_nulls;
         }
 
         public void Add(List<T> data, U value)
@@ -26,7 +35,7 @@ namespace DictionaryList
 
                 if (!AllowNULLsInKeys && item == null)
                     throw new ArgumentException($"Element at index '{i}' is NULL. It cannot be used as a Key's element. " +
-                        $"If you want to use NULLs inside Keys, then ");
+                        $"If you want to use NULLs inside Keys, then either use constructor 'DictionaryList(true)' or set property 'AllowNULLsInKeys' to true.");
 
                 Node<T, U> found = FindNode(current, item);
 

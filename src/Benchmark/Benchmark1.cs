@@ -13,7 +13,7 @@ namespace Benchmark
         [GlobalSetup]
         public void GlobalSetup()
         {
-            dlist = new DictionaryList<int, int>(true);
+            dlist = new DictionaryList<int, int>();
             Lists = Benchmark1Data1.GetData().ToList();
             Lists2 = Benchmark1Data2.GetData().ToList();
         }
