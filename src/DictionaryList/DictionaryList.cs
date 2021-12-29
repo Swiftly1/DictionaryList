@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace DictionaryList
 {
@@ -9,6 +10,11 @@ namespace DictionaryList
         private readonly Node<T, U> Root = new Node<T, U>(default!, null) { IsRoot = true };
 
         public bool AllowNULLsInKeys { get; set; }
+
+        public DictionaryList(bool allow_nulls = false)
+        {
+            AllowNULLsInKeys = allow_nulls;
+        }
 
         public void Add(List<T> data, U value)
         {
@@ -19,11 +25,10 @@ namespace DictionaryList
                 T item = data[i];
 
                 if (!AllowNULLsInKeys && item == null)
-                    throw new ArgumentException($"Element at index '{i}' is null. It cannot be used as a Key's element");
+                    throw new ArgumentException($"Element at index '{i}' is NULL. It cannot be used as a Key's element. " +
+                        $"If you want to use NULLs inside Keys, then ");
 
-                var found = AllowNULLsInKeys ?
-                    current.Children.FirstOrDefault(x => Equals(x.ArrayValue, item)) :
-                    current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
+                Node<T, U> found = FindNode(current, item);
 
                 var isLast = i == data.Count - 1;
 
@@ -55,6 +60,14 @@ namespace DictionaryList
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private Node<T, U> FindNode(Node<T, U> current, T item)
+        {
+            return AllowNULLsInKeys ?
+                current.Children.FirstOrDefault(x => Equals(x.ArrayValue, item)) :
+                current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
+        }
+
         public bool TryGet(List<T> data, out U? value)
         {
             var current = Root;
@@ -63,9 +76,7 @@ namespace DictionaryList
             {
                 T item = data[i];
 
-                var found = AllowNULLsInKeys ?
-                    current.Children.FirstOrDefault(x => Equals(x.ArrayValue, item)) :
-                    current.Children.FirstOrDefault(x => x.ArrayValue!.Equals(item));
+                Node<T, U> found = FindNode(current, item);
 
                 var isLast = i == data.Count - 1;
 
