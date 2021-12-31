@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Benchmark\Benchmark.csproj" />
     <ProjectReference Include="..\DictionaryList\DictionaryList.csproj" />
   </ItemGroup>
 

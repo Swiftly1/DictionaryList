@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DictionaryList\DictionaryList.csproj" />
+    <PackageReference Include="DictionaryList.Core" Version="1.0.0" />
   </ItemGroup>
-
 </Project>
