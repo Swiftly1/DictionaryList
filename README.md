@@ -37,6 +37,20 @@ and I decided to use tree-based approach, which's explained below.
 	
 	dict.Add(list2, 123); // Throws an ArgumentException since Value is different for the same key
 
+# Configuration
+
+DictionaryList's constructor accepts a boolean `allow_keys_with_nulls` that indicates whether you want to have NULLs inside keys (list).
+
+So basically if you want to work with NULLs like this: `new List<User> { new User(), null, new User() }`, then you should use either:
+
+	var dict = new DictionaryList<Test, int>(true);
+or
+
+	var dict = new DictionaryList<Test, int>();
+	dict.AllowNULLsInKeys = true;
+	
+If you don't allow NULLs in keys and insert one with NULL then there'll be an exception thrown. 
+
 # How does it work?
 
 Basically it represents all those lists as a tree and stores pairs of list's elements and **NULL or if that was the last element, then the value** 
