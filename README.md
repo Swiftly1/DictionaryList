@@ -41,6 +41,8 @@ and I decided to use tree-based approach, which's explained below.
 
 DictionaryList's constructor accepts a boolean `allow_keys_with_nulls` that indicates whether you want to have NULLs inside keys (list).
 
+By default this value is set to false, so it doesn't allow NULLs inside keys.
+
 So basically if you want to work with NULLs like this: `new List<User> { new User(), null, new User() }`, then you should use either:
 
 	var dict = new DictionaryList<Test, int>(true);
@@ -50,6 +52,8 @@ or
 	dict.AllowNULLsInKeys = true;
 	
 If you don't allow NULLs in keys and insert one with NULL then there'll be an exception thrown. 
+
+It was possible to do it that way that it'd work fine for both use cases without some boolean but there was some performance penalty that I believe doesn't have to be paid by majority of use cases / users.
 
 # How does it work?
 
