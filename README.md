@@ -7,6 +7,10 @@ but they were too slow for me
 
 and I decided to use tree-based approach, which's explained below.
 
+# Installation
+
+.NET CLI: `dotnet add package DictionaryList.Core --version 1.0.0`
+
 # Example 1
 	var dict = new DictionaryList<int, int>();
 
@@ -49,6 +53,4 @@ For example, for those lists, the tree will look like:
 
 # todo
 
-Benchmarks,
-
-Tests for Ref Types
+Benchmarks
