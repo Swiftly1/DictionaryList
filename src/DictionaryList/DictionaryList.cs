@@ -17,7 +17,7 @@ namespace DictionaryList
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="allow_nulls">This parameter indicates whether key contains NULLs e.g [UserA, null, new User()].
+        /// <param name="allow_keys_with_nulls">This parameter indicates whether key contains NULLs e.g [UserA, null, new User()].
         /// Allowing NULLs within keys has some performance - speed and memory penalty, that's why it is disabled by default.</param>
         public DictionaryList(bool allow_keys_with_nulls = false)
         {
