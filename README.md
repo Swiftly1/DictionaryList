@@ -2,8 +2,8 @@
  
 The purpose of this code is to implement something like Dictionary<T, U> where T is List<>
 
-I've seen hashcode calculation based implementations, 
-but they were too slow for me
+~~I've seen hashcode calculation based implementations, 
+but they were too slow for me~~ I did something wrong when benchmarking
 
 and I decided to use tree-based approach, which's explained below.
 
